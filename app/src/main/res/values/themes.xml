@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.XXLifeLab" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/lifelab_primary</item>
+        <item name="colorSecondary">@color/lifelab_info</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="android:colorAccent">@color/lifelab_primary</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="Theme.XXLifeLab" parent="Base.Theme.XXLifeLab" />
+</resources>

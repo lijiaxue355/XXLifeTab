@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph_lab"
+    app:startDestination="@id/experimentListFragment">
+    <fragment
+        android:id="@+id/experimentListFragment"
+        android:name="com.lifelab.feature.experiment.list.ExperimentListFragment"
+        android:label="实验列表">
+        <action
+            android:id="@+id/action_experimentListFragment_to_experimentEditorGraph"
+            app:destination="@id/experiment_editor_graph" />
+    </fragment>
+
+    <include app:graph="@navigation/experiment_editor_graph" />
+</navigation>

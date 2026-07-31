@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="lifelab_primary">#7D7793</color>
+    <color name="lifelab_primary_dark">#5E596F</color>
+    <color name="lifelab_primary_surface">#E9E6EF</color>
+    <color name="lifelab_primary_surface_text">#EEEAF4</color>
+    <color name="lifelab_primary_track">#AAA4B7</color>
+    <color name="lifelab_success">#A8B8A1</color>
+    <color name="lifelab_success_surface">#E8EFE5</color>
+    <color name="lifelab_success_text">#5F755A</color>
+    <color name="lifelab_info">#9FB4C5</color>
+    <color name="lifelab_info_surface">#E7EFF5</color>
+    <color name="lifelab_info_text">#587386</color>
+    <color name="lifelab_warning_surface">#F5EEE4</color>
+    <color name="lifelab_warning_text">#B28B5D</color>
+    <color name="lifelab_metric_rose">#C6A6A1</color>
+    <color name="lifelab_metric_sand">#B7A58D</color>
+    <color name="lifelab_neutral_surface">#FAFAF8</color>
+    <color name="lifelab_primary_soft">#9892AA</color>
+    <color name="lifelab_preview_text">#ECEAF0</color>
+    <color name="lifelab_background">#F4F4F2</color>
+    <color name="lifelab_text_primary">#2E3036</color>
+    <color name="lifelab_text_secondary">#71747B</color>
+    <color name="lifelab_nav_inactive">#A0A2A7</color>
+    <color name="lifelab_divider">#DEDEE2</color>
+</resources>

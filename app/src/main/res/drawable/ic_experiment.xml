@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="22dp"
+    android:height="22dp"
+    android:viewportWidth="22"
+    android:viewportHeight="22">
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M8,3 H14 M9,3 V8 L4.5,16.5 Q4,19 6.5,19 H15.5 Q18,19 17.5,16.5 L13,8 V3 M7,13 H15"
+        android:strokeColor="@color/lifelab_nav_inactive"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="1.7" />
+</vector>

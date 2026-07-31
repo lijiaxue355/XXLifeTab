@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/experiment_editor_graph"
+    app:startDestination="@id/experimentEditorBasicFragment">
+
+    <fragment
+        android:id="@+id/experimentEditorBasicFragment"
+        android:name="com.lifelab.feature.experiment.editor.ExperimentEditorBasicFragment"
+        android:label="基本信息">
+
+        <action
+            android:id="@+id/action_experimentEditorBasicFragment_to_experimentEditorScheduleFragment"
+            app:destination="@id/experimentEditorScheduleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/experimentEditorScheduleFragment"
+        android:name="com.lifelab.feature.experiment.editor.ExperimentEditorScheduleFragment"
+        android:label="实验计划">
+
+        <action
+            android:id="@+id/action_experimentEditorScheduleFragment_to_experimentEditorMetricsFragment"
+            app:destination="@id/experimentEditorMetricsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/experimentEditorMetricsFragment"
+        android:name="com.lifelab.feature.experiment.editor.ExperimentEditorMetricsFragment"
+        android:label="记录指标">
+
+        <action
+            android:id="@+id/action_experimentEditorMetricsFragment_to_experimentEditorPreviewFragment"
+            app:destination="@id/experimentEditorPreviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/experimentEditorPreviewFragment"
+        android:name="com.lifelab.feature.experiment.editor.ExperimentEditorPreviewFragment"
+        android:label="确认方案" />
+
+</navigation>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.XXLifeLab.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/white</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="elevation">0dp</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.XXLifeLab.BottomNavigationView.ActiveIndicator</item>
+        <item name="itemRippleColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.XXLifeLab.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:width">60dp</item>
+        <item name="android:height">30dp</item>
+        <item name="android:color">@color/lifelab_primary_surface</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.XXLifeLab.BottomNavigationIndicator</item>
+    </style>
+
+    <style name="ShapeAppearance.XXLifeLab.BottomNavigationIndicator" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="TextAppearance.XXLifeLab.BottomNavigation.Active" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.XXLifeLab.BottomNavigation.Inactive" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+</resources>

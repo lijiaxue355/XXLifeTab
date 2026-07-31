@@ -1,0 +1,34 @@
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:10:12 Unresolved reference 'example'.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:11:12 Unresolved reference 'example'.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:15:35 Unresolved reference 'ActivityMainBinding'.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:20:19 Unresolved reference 'ActivityMainBinding'.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:21:9 None of the following candidates is applicable:
+fun setContentView(p0: Int): Unit
+fun setContentView(p0: View?): Unit
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:21:32 Cannot access 'val File.root: File': it is internal in file.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:28:59 Unresolved reference 'main'.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:37:45 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:37:59 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:38:9 Unresolved reference 'startRecordingButton'.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:41:9 Unresolved reference 'editTodayRecord'.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:44:9 Unresolved reference 'activeExperimentCard'.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:47:9 Unresolved reference 'reportCard'.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:50:9 Unresolved reference 'viewAllExperiments'.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:53:9 Unresolved reference 'experimentsTab'.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:56:9 Unresolved reference 'profileTab'.
+e: file:///D:/AndroidStudioProjects/XXLifeLab/app/src/main/java/com/lifelab/MainActivity.kt:62:31 Unresolved reference 'main'.
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 5s
