@@ -14,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import com.lifelab.LifeLabApplication
 import com.lifelab.R
 import com.lifelab.databinding.FragmentExperimentsBinding
-import com.lifelab.feature.experiment.editor.ExperimentListViewModel
 import kotlinx.coroutines.launch
 
 class ExperimentListFragment : Fragment() {
@@ -22,8 +21,8 @@ class ExperimentListFragment : Fragment() {
     private val binding: FragmentExperimentsBinding
         get() = checkNotNull(_binding)
     private val viewModel: ExperimentListViewModel by viewModels {
-        val applicetion = requireActivity().application as LifeLabApplication
-        ExperimentListViewModel.provideFractory(applicetion.experimentRepository)
+        val application = requireActivity().application as LifeLabApplication
+        ExperimentListViewModel.provideFactory(application.experimentRepository)
     }
     private val experimentAdapter = ExperimentListAdapter()
     override fun onCreateView(

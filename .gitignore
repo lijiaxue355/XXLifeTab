@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+/server-data/
+/server/build/
+*.mv.db
+*.trace.db

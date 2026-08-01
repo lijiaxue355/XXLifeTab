@@ -1,4 +1,4 @@
-package com.lifelab.feature.experiment.editor
+package com.lifelab.feature.experiment.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -11,20 +11,23 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
-class ExperimentListViewModel(private val repository: ExperimentRepository) : ViewModel() {
+class ExperimentListViewModel(
+    repository: ExperimentRepository,
+) : ViewModel() {
 
-    val experiments : StateFlow<List<ExperimentWithMetrics>> = repository.experiments.stateIn(
-        scope = viewModelScope, started = SharingStarted.WhileSubscribed(5_000)
-        , initialValue = emptyList()
-    )
+    val experiments: StateFlow<List<ExperimentWithMetrics>> =
+        repository.experiments.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = emptyList(),
+        )
 
     companion object {
-        fun provideFractory(repository: ExperimentRepository): ViewModelProvider.Factory {
-            return viewModelFactory {
+        fun provideFactory(repository: ExperimentRepository): ViewModelProvider.Factory =
+            viewModelFactory {
                 initializer {
                     ExperimentListViewModel(repository)
                 }
             }
-        }
     }
 }

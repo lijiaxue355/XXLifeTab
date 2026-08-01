@@ -24,4 +24,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "XXLifeLab"
 include(":app")
+include(":server")
  
