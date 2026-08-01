@@ -4,12 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.lifelab.LifeLabApplication
 import com.lifelab.R
 import com.lifelab.databinding.FragmentEditorPreviewBinding
+import kotlinx.coroutines.launch
 
 class ExperimentEditorPreviewFragment : Fragment() {
 
@@ -37,15 +43,67 @@ class ExperimentEditorPreviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.previewSaveDraftButton.isVisible = false
+
+        val draft = viewModel.draft.value
+
+        binding.previewExperimentName.text = draft.name
+
+        binding.durationBadge.text = getString(
+            R.string.duration_days_format,
+            draft.durationDays
+        )
 
         binding.previewEditorToolbar.editorBackButton.setOnClickListener {
             findNavController().popBackStack()
         }
-        binding.previewSaveDraftButton.setOnClickListener {
-            findNavController().popBackStack(R.id.experimentListFragment, false)
-        }
+//        binding.previewSaveDraftButton.setOnClickListener {
+//            findNavController().popBackStack(R.id.experimentListFragment, false)
+//        }
         binding.previewStartButton.setOnClickListener {
-            findNavController().popBackStack(R.id.experimentListFragment, false)
+            viewModel.startExperiment()
+        }
+        observeSaveState()
+    }
+
+    private fun observeSaveState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.saveState.collect { saveState ->
+                    when(saveState){
+                        ExperimentSaveState.Idle -> {
+                            binding.previewStartButton.isEnabled = true
+                            binding.previewStartButton.setText(
+                                R.string.start_experiment_now
+                            )
+                        }
+
+                        ExperimentSaveState.Saving -> {
+                            binding.previewStartButton.isEnabled = false
+                            binding.previewStartButton.setText(
+                                R.string.saving_experiment
+                            )
+                        }
+                        is ExperimentSaveState.Success -> {
+                            findNavController().popBackStack(R.id.experimentListFragment,false)
+                        }
+                        is ExperimentSaveState.Error -> {
+                            binding.previewStartButton.isEnabled = true
+
+                            Toast.makeText(
+                                requireContext(),
+                                getString(
+                                    R.string.save_experiment_failed,
+                                    saveState.message
+                                ),
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            viewModel.consumeSaveError()
+                        }
+                    }
+                }
+            }
         }
     }
 

@@ -52,6 +52,8 @@
     <string name="completion_40">完成率 40%</string>
     <string name="view_details">查看详情</string>
     <string name="more_actions">更多操作</string>
+    <string name="saving_experiment">保存中…</string>
+    <string name="save_experiment_failed">保存失败：%1$s</string>
 
     <!-- Experiment editor shared -->
     <string name="editor_title">新建实验</string>
@@ -132,4 +134,10 @@
     <string name="duration_days_format">%1$d 天</string>
     <string name="baseline_days_format">前 %1$d 天</string>
     <string name="intervention_days_format">后 %1$d 天</string>
+    <string name="active_experiment_count_format">%1$d 个进行中的实验</string>
+    <string name="phase_baseline_day_format">基线阶段 · 第 %1$d / %2$d 天</string>
+    <string name="phase_intervention_day_format">干预阶段 · 第 %1$d / %2$d 天</string>
+    <string name="completion_format">完成率 %1$d%%</string>
+    <string name="metric_count_format">%1$d 个记录指标</string>
+    <string name="no_experiments">还没有实验，点击“新建实验”开始吧</string>
 </resources>

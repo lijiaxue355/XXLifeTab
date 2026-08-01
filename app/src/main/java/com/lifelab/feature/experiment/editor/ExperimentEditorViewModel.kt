@@ -2,18 +2,25 @@ package com.lifelab.feature.experiment.editor
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.lifelab.R
+import com.lifelab.feature.experiment.data.mapper.toExperimentEntity
+import com.lifelab.feature.experiment.data.mapper.toMetricEntities
 import com.lifelab.feature.experiment.data.repository.ExperimentRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
 class ExperimentEditorViewModel(private val repository: ExperimentRepository): ViewModel() {
     private val _draft = MutableStateFlow(ExperimentDraft())
     val draft : StateFlow<ExperimentDraft> = _draft.asStateFlow()
+    private val _saveState = MutableStateFlow<ExperimentSaveState>(ExperimentSaveState.Idle)
+    val saveState : StateFlow<ExperimentSaveState> = _saveState.asStateFlow()
 
 
     fun updateBasicInfo(name: String, hypothesis: String ,
@@ -42,6 +49,35 @@ class ExperimentEditorViewModel(private val repository: ExperimentRepository): V
                 baselineDays = baselineDays,
                 interventionDays = interventionDays
             )
+        }
+    }
+
+    fun startExperiment(){
+        if(_saveState.value is ExperimentSaveState.Saving){
+            return
+        }
+        val currentDraft = _draft.value
+        viewModelScope.launch {
+            try {
+                _saveState.value = ExperimentSaveState.Saving
+
+                val experimentId =  repository.createExperiment(experiment = currentDraft.toExperimentEntity(),
+                    metrics = currentDraft.toMetricEntities())
+
+                _saveState.value = ExperimentSaveState.Success(experimentId)
+            }catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                _saveState.value = ExperimentSaveState.Error(
+                    message = error.message ?: "未知错误"
+                )
+            }
+
+        }
+    }
+    fun consumeSaveError() {
+        if (_saveState.value is ExperimentSaveState.Error) {
+            _saveState.value = ExperimentSaveState.Idle
         }
     }
 

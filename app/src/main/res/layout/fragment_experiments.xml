@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:background="@color/lifelab_background">
+    android:background="@color/lifelab_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/experiments_toolbar"
@@ -20,7 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
-            android:fontFamily="sans-serif"
             android:text="@string/experiments_title"
             android:textColor="@color/lifelab_text_primary"
             android:textSize="21sp"
@@ -42,397 +40,115 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/experiments_scroll"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/experiment_filter_card"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/lifelab_background"
-        android:clipToPadding="false"
-        android:fillViewport="true"
-        android:overScrollMode="never"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="44dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="22dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/experiments_toolbar">
+        app:layout_constraintTop_toBottomOf="@id/experiments_toolbar"
+        app:strokeWidth="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="22dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="22dp"
-            android:paddingBottom="104dp">
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:padding="2dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_primary_chip"
-                        android:fontFamily="sans-serif"
-                        android:gravity="center"
-                        android:text="@string/filter_active"
-                        android:textColor="@color/lifelab_primary_dark"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif"
-                        android:gravity="center"
-                        android:text="@string/filter_draft"
-                        android:textColor="@color/lifelab_text_secondary"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif"
-                        android:gravity="center"
-                        android:text="@string/filter_completed"
-                        android:textColor="@color/lifelab_text_secondary"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif"
-                        android:gravity="center"
-                        android:text="@string/filter_archived"
-                        android:textColor="@color/lifelab_text_secondary"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:padding="2dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/active_experiment_count"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_primary_chip"
+                android:gravity="center"
+                android:text="@string/filter_active"
+                android:textColor="@color/lifelab_primary_dark"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/filter_draft"
                 android:textColor="@color/lifelab_text_secondary"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="204dp"
-                android:layout_marginTop="12dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="0dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/filter_completed"
+                android:textColor="@color/lifelab_text_secondary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/phone_experiment_icon_card"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        app:cardBackgroundColor="@color/lifelab_primary_surface"
-                        app:cardCornerRadius="18dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:strokeWidth="0dp">
-
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="@null"
-                            android:src="@drawable/ic_flask_primary" />
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <TextView
-                        android:id="@+id/phone_experiment_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="8dp"
-                        android:ellipsize="end"
-                        android:fontFamily="sans-serif"
-                        android:maxLines="1"
-                        android:text="@string/experiment_phone_free"
-                        android:textColor="@color/lifelab_text_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@id/phone_more_button"
-                        app:layout_constraintStart_toEndOf="@id/phone_experiment_icon_card"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageButton
-                        android:id="@+id/phone_more_button"
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
-                        android:layout_marginEnd="6dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="@string/more_actions"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_more_horizontal"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="7dp"
-                        android:fontFamily="sans-serif"
-                        android:text="@string/phase_intervention_day"
-                        android:textColor="@color/lifelab_text_secondary"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toEndOf="@id/phone_experiment_icon_card"
-                        app:layout_constraintTop_toBottomOf="@id/phone_experiment_name" />
-
-                    <TextView
-                        android:id="@+id/phone_record_status"
-                        android:layout_width="66dp"
-                        android:layout_height="26dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="18dp"
-                        android:background="@drawable/bg_warning_chip"
-                        android:fontFamily="sans-serif"
-                        android:gravity="center"
-                        android:text="@string/pending_record"
-                        android:textColor="@color/lifelab_warning_text"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/phone_experiment_icon_card" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="26dp"
-                        android:layout_marginStart="12dp"
-                        android:fontFamily="sans-serif"
-                        android:gravity="center_vertical"
-                        android:text="@string/saved_locally"
-                        android:textColor="@color/lifelab_text_secondary"
-                        android:textSize="11sp"
-                        app:layout_constraintStart_toEndOf="@id/phone_record_status"
-                        app:layout_constraintTop_toTopOf="@id/phone_record_status" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/phone_progress_track"
-                        android:layout_width="0dp"
-                        android:layout_height="8dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="38dp"
-                        android:background="@drawable/bg_progress_track"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/phone_record_status">
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="8dp"
-                            android:background="@drawable/bg_progress_fill"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintWidth_percent="0.71" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginBottom="22dp"
-                        android:text="@string/completion_71"
-                        android:textColor="@color/lifelab_text_secondary"
-                        android:textSize="11sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="@string/view_details"
-                        android:textColor="@color/lifelab_primary"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="204dp"
-                android:layout_marginTop="18dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="0dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/walk_experiment_icon_card"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        app:cardBackgroundColor="@color/lifelab_success_surface"
-                        app:cardCornerRadius="18dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:strokeWidth="0dp">
-
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="@null"
-                            android:src="@drawable/ic_flask_success" />
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <TextView
-                        android:id="@+id/walk_experiment_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="8dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="@string/experiment_walk"
-                        android:textColor="@color/lifelab_text_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@id/walk_more_button"
-                        app:layout_constraintStart_toEndOf="@id/walk_experiment_icon_card"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageButton
-                        android:id="@+id/walk_more_button"
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
-                        android:layout_marginEnd="6dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="@string/more_actions"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_more_horizontal"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="7dp"
-                        android:text="@string/phase_baseline_day"
-                        android:textColor="@color/lifelab_text_secondary"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toEndOf="@id/walk_experiment_icon_card"
-                        app:layout_constraintTop_toBottomOf="@id/walk_experiment_name" />
-
-                    <TextView
-                        android:id="@+id/walk_record_status"
-                        android:layout_width="66dp"
-                        android:layout_height="26dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="18dp"
-                        android:background="@drawable/bg_success_chip"
-                        android:gravity="center"
-                        android:text="@string/record_completed"
-                        android:textColor="@color/lifelab_success_text"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/walk_experiment_icon_card" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="26dp"
-                        android:layout_marginStart="12dp"
-                        android:gravity="center_vertical"
-                        android:text="@string/saved_locally"
-                        android:textColor="@color/lifelab_text_secondary"
-                        android:textSize="11sp"
-                        app:layout_constraintStart_toEndOf="@id/walk_record_status"
-                        app:layout_constraintTop_toTopOf="@id/walk_record_status" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/walk_progress_track"
-                        android:layout_width="0dp"
-                        android:layout_height="8dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="38dp"
-                        android:background="@drawable/bg_progress_track"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/walk_record_status">
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="8dp"
-                            android:background="@drawable/bg_success_accent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintWidth_percent="0.4" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginBottom="22dp"
-                        android:text="@string/completion_40"
-                        android:textColor="@color/lifelab_text_secondary"
-                        android:textSize="11sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="@string/view_details"
-                        android:textColor="@color/lifelab_primary"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/filter_archived"
+                android:textColor="@color/lifelab_text_secondary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/active_experiment_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/active_experiment_count"
+        android:textColor="@color/lifelab_text_secondary"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/experiment_filter_card" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/experiment_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingStart="22dp"
+        android:paddingEnd="22dp"
+        android:paddingBottom="104dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/active_experiment_count"
+        tools:listitem="@layout/item_experiment" />
+
+    <TextView
+        android:id="@+id/empty_experiments_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/no_experiments"
+        android:textColor="@color/lifelab_text_secondary"
+        android:textSize="13sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/experiment_list"
+        app:layout_constraintEnd_toEndOf="@id/experiment_list"
+        app:layout_constraintStart_toStartOf="@id/experiment_list"
+        app:layout_constraintTop_toTopOf="@id/experiment_list"
+        tools:visibility="visible" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/new_experiment_fab"
