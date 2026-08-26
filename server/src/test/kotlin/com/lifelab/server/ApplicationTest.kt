@@ -33,7 +33,7 @@ class ApplicationTest {
     @Test
     fun `authentication experiments and records work end to end`() = testApplication {
         application {
-            module(
+            configureApplication(
                 AppConfig(
                     databaseUrl = "jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1",
                     jwtSecret = "test-secret-with-at-least-thirty-two-characters",
@@ -52,10 +52,10 @@ class ApplicationTest {
             apiClient.get("/api/v1/experiments").status,
         )
 
-        register(apiClient, "owner@lifelab.test", "实验者")
+        register(apiClient, "owner_user")
         val loginResponse = apiClient.post("/api/v1/auth/login") {
             contentType(ContentType.Application.Json)
-            setBody(LoginRequest("owner@lifelab.test", "password123"))
+            setBody(LoginRequest("owner_user", "password123"))
         }
         assertEquals(HttpStatusCode.OK, loginResponse.status)
         val ownerAuth = loginResponse.body<AuthResponse>()
@@ -135,7 +135,7 @@ class ApplicationTest {
         assertEquals(1, records.size)
         assertEquals(2, records.single().values.size)
 
-        val secondUserAuth = register(apiClient, "second@lifelab.test", "另一个用户")
+        val secondUserAuth = register(apiClient, "second_user")
         val secondUserExperiments = apiClient.get("/api/v1/experiments") {
             bearerAuth(secondUserAuth.accessToken)
         }.body<List<ExperimentResponse>>()
@@ -144,12 +144,11 @@ class ApplicationTest {
 
     private suspend fun register(
         client: io.ktor.client.HttpClient,
-        email: String,
-        displayName: String,
+        account: String,
     ): AuthResponse {
         val response = client.post("/api/v1/auth/register") {
             contentType(ContentType.Application.Json)
-            setBody(RegisterRequest(email, "password123", displayName))
+            setBody(RegisterRequest(account, "password123"))
         }
         assertEquals(HttpStatusCode.Created, response.status)
         return response.body<AuthResponse>().also {

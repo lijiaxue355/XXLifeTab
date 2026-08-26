@@ -2,8 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/today_nav_graph">
+    app:startDestination="@id/auth_nav_graph">
 
+    <include app:graph="@navigation/auth_nav_graph" />
     <include app:graph="@navigation/today_nav_graph" />
     <include app:graph="@navigation/navigation_graph_lab" />
     <include app:graph="@navigation/settings_nav_graph" />

@@ -31,10 +31,10 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 fun Application.module() {
-    module(AppConfig.fromEnvironment())
+    configureApplication(AppConfig.fromEnvironment())
 }
 
-fun Application.module(config: AppConfig) {
+internal fun Application.configureApplication(config: AppConfig) {
     DatabaseFactory.initialize(config.databaseUrl)
     val jwtService = JwtService(config)
 

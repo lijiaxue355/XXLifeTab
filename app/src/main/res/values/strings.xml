@@ -22,10 +22,12 @@
     <string name="edit_today_record">修改今日记录</string>
     <string name="report_updated">阶段报告已更新</string>
     <string name="report_summary">睡眠时长较基线提高 8.4%</string>
+    <string name="registering">创建中…</string>
     <string name="personal_observation_only">仅用于个人观察</string>
     <string name="report_icon_description">趋势图标</string>
     <string name="nav_today">首页</string>
     <string name="nav_experiments">实验</string>
+    <string name="logging_in">登录中…</string>
     <string name="nav_profile">我的</string>
     <string name="preview_record_message">记录页将在下一阶段接入</string>
     <string name="preview_edit_message">今日记录编辑页将在下一阶段接入</string>
@@ -140,4 +142,25 @@
     <string name="completion_format">完成率 %1$d%%</string>
     <string name="metric_count_format">%1$d 个记录指标</string>
     <string name="no_experiments">还没有实验，点击“新建实验”开始吧</string>
+
+    <!-- Authentication -->
+    <string name="auth_logo_description">LifeLab 标志</string>
+    <string name="login_welcome">欢迎回到 LifeLab</string>
+    <string name="login_subtitle">继续记录、观察并验证你的改变</string>
+    <string name="login_form_title">登录账号</string>
+    <string name="account_label">账号</string>
+    <string name="password_label">密码</string>
+    <string name="confirm_password_label">确认密码</string>
+    <string name="login_action">登录</string>
+    <string name="no_account">还没有账号？</string>
+    <string name="register_now">立即注册</string>
+    <string name="auth_sync_hint">登录后自动同步实验与打卡记录</string>
+    <string name="register_title">创建 LifeLab 账号</string>
+    <string name="register_subtitle">从一个小实验开始，积累属于你的证据</string>
+    <string name="register_form_title">设置登录信息</string>
+    <string name="account_rule">4–24 位字母、数字或下划线</string>
+    <string name="password_rule">至少 8 位字符</string>
+    <string name="register_action">创建账号</string>
+    <string name="already_have_account">已有账号？返回登录</string>
+    <string name="register_security_hint">密码会加盐哈希保存，不会以明文存储</string>
 </resources>

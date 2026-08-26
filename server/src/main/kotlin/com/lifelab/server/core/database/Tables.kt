@@ -5,8 +5,7 @@ import org.jetbrains.exposed.v1.core.Table
 
 object UsersTable : Table("users") {
     val id = varchar("id", 36)
-    val email = varchar("email", 320).uniqueIndex()
-    val displayName = varchar("display_name", 80)
+    val account = varchar("account", 24).uniqueIndex()
     val passwordHash = varchar("password_hash", 128)
     val passwordSalt = varchar("password_salt", 64)
     val createdAtMillis = long("created_at_millis")

@@ -34,6 +34,24 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.content_container) as NavHostFragment
         val navController = navHostFragment.navController
+        if (navController.currentDestination == null) {
+            val graph = navController.navInflater.inflate(
+                R.navigation.main_nav_graph
+            )
+            val hashToken = (application as LifeLabApplication)
+                .authTokenStore
+                .hasAccessToken()
+
+            graph.setStartDestination(
+                if (hashToken) {
+                    R.id.today_nav_graph
+                } else {
+                    R.id.auth_nav_graph
+                }
+            )
+
+            navController.graph = graph
+        }
         binding.bottomNavigation.setupWithNavController(navController)
 
         val topLevelDestinations = setOf(

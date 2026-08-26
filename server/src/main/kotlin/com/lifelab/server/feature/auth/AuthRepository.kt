@@ -13,17 +13,13 @@ import java.util.UUID
 
 class AuthRepository {
     suspend fun register(request: RegisterRequest): StoredUser {
-        val email = request.email.trim().lowercase()
-        val displayName = request.displayName.trim()
-        validateEmail(email)
+        val account = request.account.trim()
+        validateAccount(account)
         validatePassword(request.password)
-        if (displayName.isBlank() || displayName.length > 80) {
-            throw ApiException(HttpStatusCode.BadRequest, "INVALID_DISPLAY_NAME", "昵称长度应为 1 到 80 个字符")
-        }
 
         return DatabaseFactory.dbQuery {
-            if (findByEmail(email) != null) {
-                throw ApiException(HttpStatusCode.Conflict, "EMAIL_ALREADY_EXISTS", "该邮箱已经注册")
+            if (findByAccount(account) != null) {
+                throw ApiException(HttpStatusCode.Conflict, "ACCOUNT_ALREADY_EXISTS", "该账号已经注册")
             }
 
             val userId = UUID.randomUUID().toString()
@@ -31,16 +27,14 @@ class AuthRepository {
             val createdAt = System.currentTimeMillis()
             UsersTable.insert {
                 it[id] = userId
-                it[UsersTable.email] = email
-                it[UsersTable.displayName] = displayName
+                it[UsersTable.account] = account
                 it[UsersTable.passwordHash] = passwordHash.hash
                 it[passwordSalt] = passwordHash.salt
                 it[createdAtMillis] = createdAt
             }
             StoredUser(
                 id = userId,
-                email = email,
-                displayName = displayName,
+                account = account,
                 passwordHash = passwordHash.hash,
                 passwordSalt = passwordHash.salt,
             )
@@ -48,9 +42,9 @@ class AuthRepository {
     }
 
     suspend fun authenticate(request: LoginRequest): StoredUser {
-        val email = request.email.trim().lowercase()
-        validateEmail(email)
-        val user = DatabaseFactory.dbQuery { findByEmail(email) }
+        val account = request.account.trim()
+        validateAccount(account)
+        val user = DatabaseFactory.dbQuery { findByAccount(account) }
             ?: throw invalidCredentials()
 
         if (!PasswordHasher.verify(request.password, user.passwordHash, user.passwordSalt)) {
@@ -59,23 +53,22 @@ class AuthRepository {
         return user
     }
 
-    private fun findByEmail(email: String): StoredUser? = UsersTable
+    private fun findByAccount(account: String): StoredUser? = UsersTable
         .selectAll()
-        .where { UsersTable.email eq email }
+        .where { UsersTable.account eq account }
         .singleOrNull()
         ?.toStoredUser()
 
     private fun ResultRow.toStoredUser() = StoredUser(
         id = this[UsersTable.id],
-        email = this[UsersTable.email],
-        displayName = this[UsersTable.displayName],
+        account = this[UsersTable.account],
         passwordHash = this[UsersTable.passwordHash],
         passwordSalt = this[UsersTable.passwordSalt],
     )
 
-    private fun validateEmail(email: String) {
-        if (email.length !in 3..320 || !EMAIL_REGEX.matches(email)) {
-            throw ApiException(HttpStatusCode.BadRequest, "INVALID_EMAIL", "请输入有效邮箱")
+    private fun validateAccount(account: String) {
+        if (!ACCOUNT_REGEX.matches(account)) {
+            throw ApiException(HttpStatusCode.BadRequest, "INVALID_ACCOUNT", "账号应为 4 到 24 位字母、数字或下划线")
         }
     }
 
@@ -88,10 +81,10 @@ class AuthRepository {
     private fun invalidCredentials() = ApiException(
         HttpStatusCode.Unauthorized,
         "INVALID_CREDENTIALS",
-        "邮箱或密码错误",
+        "账号或密码错误",
     )
 
     companion object {
-        private val EMAIL_REGEX = Regex("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")
+        private val ACCOUNT_REGEX = Regex("^[A-Za-z0-9_]{4,24}$")
     }
 }

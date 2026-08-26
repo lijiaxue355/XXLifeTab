@@ -4,14 +4,13 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RegisterRequest(
-    val email: String,
+    val account: String,
     val password: String,
-    val displayName: String,
 )
 
 @Serializable
 data class LoginRequest(
-    val email: String,
+    val account: String,
     val password: String,
 )
 
@@ -24,16 +23,14 @@ data class AuthResponse(
 @Serializable
 data class UserResponse(
     val id: String,
-    val email: String,
-    val displayName: String,
+    val account: String,
 )
 
 data class StoredUser(
     val id: String,
-    val email: String,
-    val displayName: String,
+    val account: String,
     val passwordHash: String,
     val passwordSalt: String,
 ) {
-    fun toResponse() = UserResponse(id, email, displayName)
+    fun toResponse() = UserResponse(id, account)
 }
