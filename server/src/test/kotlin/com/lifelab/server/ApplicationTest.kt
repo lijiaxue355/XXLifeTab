@@ -14,6 +14,7 @@ import com.lifelab.server.feature.template.TemplateResponse
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.bearerAuth
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -140,6 +141,41 @@ class ApplicationTest {
             bearerAuth(secondUserAuth.accessToken)
         }.body<List<ExperimentResponse>>()
         assertTrue(secondUserExperiments.isEmpty())
+
+        val otherUserDelete = apiClient.delete(
+            "/api/v1/experiments/$experimentId",
+        ) {
+            bearerAuth(secondUserAuth.accessToken)
+        }
+        assertEquals(HttpStatusCode.NoContent, otherUserDelete.status)
+
+        val experimentsAfterOtherUserDelete = apiClient
+            .get("/api/v1/experiments") {
+                bearerAuth(ownerAuth.accessToken)
+            }
+            .body<List<ExperimentResponse>>()
+        assertEquals(1, experimentsAfterOtherUserDelete.size)
+
+        val deleteExperiment = apiClient.delete(
+            "/api/v1/experiments/$experimentId",
+        ) {
+            bearerAuth(ownerAuth.accessToken)
+        }
+        assertEquals(HttpStatusCode.NoContent, deleteExperiment.status)
+
+        val experimentsAfterDelete = apiClient
+            .get("/api/v1/experiments") {
+                bearerAuth(ownerAuth.accessToken)
+            }
+            .body<List<ExperimentResponse>>()
+        assertTrue(experimentsAfterDelete.isEmpty())
+
+        val recordsAfterDelete = apiClient
+            .get("/api/v1/records") {
+                bearerAuth(ownerAuth.accessToken)
+            }
+            .body<List<RecordResponse>>()
+        assertTrue(recordsAfterDelete.isEmpty())
     }
 
     private suspend fun register(

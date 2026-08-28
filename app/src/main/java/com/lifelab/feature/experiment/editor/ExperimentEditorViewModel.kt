@@ -52,11 +52,33 @@ class ExperimentEditorViewModel(private val repository: ExperimentRepository): V
         }
     }
 
+    fun updateMetricName(name: String) {
+        _draft.update { currentDraft ->
+            currentDraft.copy(
+                metrics = listOf(
+                    MetricDraft(
+                        name = name,
+                        type = MetricType.DECIMAL,
+                        required = true,
+                    ),
+                ),
+            )
+        }
+    }
+
     fun startExperiment(){
         if(_saveState.value is ExperimentSaveState.Saving){
             return
         }
         val currentDraft = _draft.value
+
+        if (currentDraft.metrics.single().name.isBlank()) {
+            _saveState.value = ExperimentSaveState.Error(
+                message = "请填写观察指标名称",
+            )
+            return
+        }
+
         viewModelScope.launch {
             try {
                 _saveState.value = ExperimentSaveState.Saving

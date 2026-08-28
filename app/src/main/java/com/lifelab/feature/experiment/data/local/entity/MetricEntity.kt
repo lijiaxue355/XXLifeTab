@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import java.util.UUID
 
 @Entity(
     tableName = "metrics",
@@ -17,11 +18,16 @@ import androidx.room.PrimaryKey
     ],
     indices = [
         Index(value = ["experimentId"]),
+        Index(
+            value = ["syncId"],
+            unique = true,
+        ),
     ],
 )
 data class MetricEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
+    val syncId: String = UUID.randomUUID().toString(),
     val experimentId: Long,
     val name: String,
     val type: String,

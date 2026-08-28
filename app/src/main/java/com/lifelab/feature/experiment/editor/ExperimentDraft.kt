@@ -13,23 +13,7 @@ data class ExperimentDraft(
 
     val metrics: List<MetricDraft> = listOf(
         MetricDraft(
-            name = "是否完成干预",
-            type = MetricType.YES_NO,
-            required = true,
-        ),
-        MetricDraft(
-            name = "入睡耗时",
-            type = MetricType.DURATION,
-            required = true,
-        ),
-        MetricDraft(
-            name = "睡眠时长",
             type = MetricType.DECIMAL,
-            required = true,
-        ),
-        MetricDraft(
-            name = "晨间精力",
-            type = MetricType.SCORE,
             required = true,
         ),
     ),

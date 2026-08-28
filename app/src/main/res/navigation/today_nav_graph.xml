@@ -9,5 +9,21 @@
         android:id="@+id/todayFragment"
         android:name="com.lifelab.feature.today.TodayFragment"
         android:label="@string/nav_today"
-        tools:layout="@layout/fragment_today" />
+        tools:layout="@layout/fragment_today">
+
+        <action
+            android:id="@+id/action_todayFragment_to_reportFragment"
+            app:destination="@id/reportFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.lifelab.feature.report.ReportFragment"
+        android:label="周期报告"
+        tools:layout="@layout/fragment_report">
+
+        <argument
+            android:name="experimentId"
+            app:argType="long" />
+    </fragment>
 </navigation>

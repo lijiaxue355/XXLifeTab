@@ -7,14 +7,19 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.lifelab.feature.auth.data.repository.AuthRepository
 import com.lifelab.feature.auth.domain.model.AuthResult
+import com.lifelab.core.sync.data.repository.DataSyncRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
-class LoginViewModel(private val authRepository: AuthRepository) : ViewModel() {
+class LoginViewModel(
+    private val authRepository: AuthRepository,
+    private val dataSyncRepository: DataSyncRepository,
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState = _uiState.asStateFlow()
@@ -81,11 +86,27 @@ class LoginViewModel(private val authRepository: AuthRepository) : ViewModel() {
                 password = state.password
             )){
                 is AuthResult.Success -> {
-                    _uiState.update {
-                        it.copy(isLoading = false)
+                    try {
+                        dataSyncRepository.refreshFromServer(
+                            result.authResult.id,
+                        )
+                        _uiEvent.emit(
+                            LoginUiEvent.NavigateToToday,
+                        )
+                    } catch (error: CancellationException) {
+                        throw error
+                    } catch (error: Exception) {
+                        _uiEvent.emit(
+                            LoginUiEvent.ShowMessage(
+                                error.message
+                                    ?: "登录成功，但恢复数据失败",
+                            ),
+                        )
+                    } finally {
+                        _uiState.update {
+                            it.copy(isLoading = false)
+                        }
                     }
-
-                    _uiEvent.emit(LoginUiEvent.NavigateToToday)
                 }
                 is AuthResult.Failure -> {
                     _uiState.update {
@@ -104,10 +125,16 @@ class LoginViewModel(private val authRepository: AuthRepository) : ViewModel() {
 
 
     companion object {
-        fun provideFactory(authRepository: AuthRepository): ViewModelProvider.Factory {
+        fun provideFactory(
+            authRepository: AuthRepository,
+            dataSyncRepository: DataSyncRepository,
+        ): ViewModelProvider.Factory {
             return viewModelFactory {
                 initializer {
-                    LoginViewModel(authRepository)
+                    LoginViewModel(
+                        authRepository = authRepository,
+                        dataSyncRepository = dataSyncRepository,
+                    )
                 }
             }
         }

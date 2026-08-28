@@ -63,6 +63,7 @@
             android:padding="2dp">
 
             <TextView
+                android:id="@+id/active_filter"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -74,31 +75,12 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/filter_draft"
-                android:textColor="@color/lifelab_text_secondary"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
+                android:id="@+id/completed_filter"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/filter_completed"
-                android:textColor="@color/lifelab_text_secondary"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/filter_archived"
                 android:textColor="@color/lifelab_text_secondary"
                 android:textSize="12sp"
                 android:textStyle="bold" />

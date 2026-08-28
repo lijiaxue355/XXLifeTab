@@ -26,7 +26,8 @@ class RegisterFragment : Fragment() {
             requireActivity().application as LifeLabApplication
 
         RegisterViewModel.providerFactory(
-            application.authRepository
+            authRepository = application.authRepository,
+            dataSyncRepository = application.dataSyncRepository,
         )
     }
 

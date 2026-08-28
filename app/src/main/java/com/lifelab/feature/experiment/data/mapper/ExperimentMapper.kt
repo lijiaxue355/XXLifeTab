@@ -21,7 +21,7 @@ fun ExperimentDraft.toMetricEntities(): List<MetricEntity> {
     return metrics.mapIndexed { index, metric ->
         MetricEntity(
             experimentId = 0,
-            name = metric.name,
+            name = metric.name.trim(),
             type = metric.type.name,
             required = metric.required,
             sortOrder = index

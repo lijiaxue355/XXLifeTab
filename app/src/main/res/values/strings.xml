@@ -36,14 +36,15 @@
     <string name="preview_all_message">实验列表页将在下一阶段接入</string>
     <string name="preview_experiments_message">实验模块将在下一阶段接入</string>
     <string name="preview_profile_message">个人设置将在下一阶段接入</string>
+    <string name="touch_target_inspection">触控热区检测（调试）</string>
+    <string name="touch_target_inspection_enabled">热区检测已开启，宽高都小于 48dp 的可点击区域会显示红框</string>
+    <string name="touch_target_inspection_disabled">热区检测已关闭</string>
 
     <!-- Experiment list preview -->
     <string name="experiments_title">我的实验</string>
     <string name="new_experiment">新建实验</string>
     <string name="filter_active">进行中</string>
-    <string name="filter_draft">草稿</string>
     <string name="filter_completed">已完成</string>
-    <string name="filter_archived">已归档</string>
     <string name="active_experiment_count">2 个进行中的实验</string>
     <string name="phase_intervention_day">干预阶段 · 10 / 14 天</string>
     <string name="phase_baseline_day">基线阶段 · 4 / 10 天</string>
@@ -142,6 +143,11 @@
     <string name="completion_format">完成率 %1$d%%</string>
     <string name="metric_count_format">%1$d 个记录指标</string>
     <string name="no_experiments">还没有实验，点击“新建实验”开始吧</string>
+    <string name="today_current_experiment">当前实验</string>
+    <string name="today_no_experiment">还没有实验，先去创建一个实验吧</string>
+    <string name="today_not_recorded">今天还没有记录</string>
+    <string name="today_report_title">周期报告</string>
+    <string name="today_report_waiting">完成打卡后查看趋势变化</string>
 
     <!-- Authentication -->
     <string name="auth_logo_description">LifeLab 标志</string>

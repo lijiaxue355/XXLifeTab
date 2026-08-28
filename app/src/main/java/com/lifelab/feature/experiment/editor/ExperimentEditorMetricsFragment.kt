@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -38,6 +39,19 @@ class ExperimentEditorMetricsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val currentMetricName = viewModel.draft.value
+            .metrics
+            .single()
+            .name
+
+        binding.metricNameInput.setText(currentMetricName)
+        binding.metricNameInput.doAfterTextChanged { editable ->
+            binding.metricNameInputLayout.error = null
+            viewModel.updateMetricName(
+                editable?.toString().orEmpty(),
+            )
+        }
+
         binding.metricsEditorToolbar.editorBackButton.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -45,6 +59,18 @@ class ExperimentEditorMetricsFragment : Fragment() {
             findNavController().popBackStack()
         }
         binding.metricsNextButton.setOnClickListener {
+            val metricName = binding.metricNameInput.text
+                ?.toString()
+                ?.trim()
+                .orEmpty()
+
+            if (metricName.isBlank()) {
+                binding.metricNameInputLayout.error =
+                    "请输入指标名称"
+                return@setOnClickListener
+            }
+
+            viewModel.updateMetricName(metricName)
             findNavController().navigate(
                 R.id.action_experimentEditorMetricsFragment_to_experimentEditorPreviewFragment
             )

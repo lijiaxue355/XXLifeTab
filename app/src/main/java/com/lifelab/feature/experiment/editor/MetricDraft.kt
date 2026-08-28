@@ -9,6 +9,6 @@ enum class MetricType {
 
 data class MetricDraft(
     val name: String = "",
-    val type: MetricType = MetricType.YES_NO,
+    val type: MetricType = MetricType.DECIMAL,
     val required: Boolean = true,
 )

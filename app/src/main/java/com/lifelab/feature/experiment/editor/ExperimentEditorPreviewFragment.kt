@@ -48,6 +48,15 @@ class ExperimentEditorPreviewFragment : Fragment() {
         val draft = viewModel.draft.value
 
         binding.previewExperimentName.text = draft.name
+        binding.previewHypothesis.text = if (
+            draft.hypothesis.isBlank()
+        ) {
+            "未填写实验假设"
+        } else {
+            "假设：${draft.hypothesis}"
+        }
+        binding.previewMetricName.text =
+            draft.metrics.single().name
 
         binding.durationBadge.text = getString(
             R.string.duration_days_format,

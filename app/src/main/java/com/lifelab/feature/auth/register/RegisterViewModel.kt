@@ -7,13 +7,18 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.lifelab.feature.auth.data.repository.AuthRepository
 import com.lifelab.feature.auth.domain.model.AuthResult
+import com.lifelab.core.sync.data.repository.DataSyncRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
-class RegisterViewModel(private val authRepository: AuthRepository) : ViewModel() {
+class RegisterViewModel(
+    private val authRepository: AuthRepository,
+    private val dataSyncRepository: DataSyncRepository,
+) : ViewModel() {
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
@@ -34,7 +39,21 @@ class RegisterViewModel(private val authRepository: AuthRepository) : ViewModel(
                 password = password
             )) {
                 is AuthResult.Success -> {
-                    _event.emit(RegisterEvent.NavigateToToday)
+                    try {
+                        dataSyncRepository.refreshFromServer(
+                            result.authResult.id,
+                        )
+                        _event.emit(RegisterEvent.NavigateToToday)
+                    } catch (error: CancellationException) {
+                        throw error
+                    } catch (error: Exception) {
+                        _event.emit(
+                            RegisterEvent.ShowMessage(
+                                error.message
+                                    ?: "注册成功，但初始化数据失败",
+                            ),
+                        )
+                    }
                 }
 
                 is AuthResult.Failure -> {
@@ -49,10 +68,16 @@ class RegisterViewModel(private val authRepository: AuthRepository) : ViewModel(
 
 
     companion object {
-        fun providerFactory(authRepository: AuthRepository): ViewModelProvider.Factory {
+        fun providerFactory(
+            authRepository: AuthRepository,
+            dataSyncRepository: DataSyncRepository,
+        ): ViewModelProvider.Factory {
             return viewModelFactory {
                 initializer {
-                    RegisterViewModel(authRepository)
+                    RegisterViewModel(
+                        authRepository = authRepository,
+                        dataSyncRepository = dataSyncRepository,
+                    )
                 }
             }
         }

@@ -88,7 +88,11 @@ class AuthRepository(
             message = "服务器返回数据为空"
         )
 
-        authTokenStore.saveAccessToken(responseBody.accessToken)
+        authTokenStore.saveSession(
+            token = responseBody.accessToken,
+            userId = responseBody.user.id,
+            account = responseBody.user.account,
+        )
         return AuthResult.Success(
             AuthUser(
                 responseBody.user.id,

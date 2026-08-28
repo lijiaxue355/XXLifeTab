@@ -25,7 +25,8 @@ class LoginFragment : Fragment() {
     private val viewModel: LoginViewModel by viewModels {
         val application = requireActivity().application as LifeLabApplication
         LoginViewModel.provideFactory(
-            application.authRepository
+            authRepository = application.authRepository,
+            dataSyncRepository = application.dataSyncRepository,
         )
     }
 

@@ -2,6 +2,7 @@ package com.lifelab.core.network
 
 import com.lifelab.BuildConfig
 import com.lifelab.core.session.AuthTokenStore
+import com.lifelab.core.sync.data.remote.SyncApi
 import com.lifelab.feature.auth.data.remote.AuthApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -50,7 +51,9 @@ object NetworkModule {
     val authApi: AuthApi by lazy {
         retrofit.create(AuthApi::class.java)
     }
-
+    val syncApi: SyncApi by lazy {
+        retrofit.create(SyncApi::class.java)
+    }
 
 
 

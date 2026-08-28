@@ -8,6 +8,7 @@ import com.lifelab.server.core.error.ApiException
 import io.ktor.http.HttpStatusCode
 import org.jetbrains.exposed.v1.core.ResultRow
 import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.core.and
 import org.jetbrains.exposed.v1.core.SortOrder
 import org.jetbrains.exposed.v1.core.statements.UpdateBuilder
 import org.jetbrains.exposed.v1.jdbc.deleteWhere
@@ -77,6 +78,21 @@ class ExperimentRepository {
             toExperimentResponse(
                 ExperimentsTable.selectAll().where { ExperimentsTable.id eq experimentId }.single(),
             )
+        }
+    }
+
+    suspend fun delete(
+        userId: String,
+        experimentId: String?,
+    ) {
+        val validExperimentId = experimentId
+            .toUuidOrNew("实验 ID")
+
+        DatabaseFactory.dbQuery {
+            ExperimentsTable.deleteWhere {
+                (ExperimentsTable.id eq validExperimentId) and
+                    (ExperimentsTable.userId eq userId)
+            }
         }
     }
 
